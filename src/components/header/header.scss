@@ -1,0 +1,36 @@
+@import "../../variables";
+
+.header{
+  height: 100px;
+  background-color: $accent;
+}
+
+.logo{
+  position: relative;
+  padding-left: 33px;
+  display: inline-block;
+  color: $font;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    background-image: url('../../static/logo.svg');
+    background-repeat: no-repeat;
+    border-color: #000;
+  }
+}
+
+a.logo{
+  transition: 0.2s;
+  &:hover{
+    color: $font;
+    text-decoration: none;
+    transform: scale(1.1);
+  }
+}
