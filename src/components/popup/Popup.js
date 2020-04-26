@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import Rodal from 'rodal';
 import {connect} from "react-redux";
 import 'rodal/lib/rodal.css';
-import {closeMenu, openMenu} from "../../services/menu/actions";
+import {closeMenu, openMenu, removeMenu} from "../../services/menu/actions";
 
 class Popup extends Component {
     hide = () => {
         this.props.closeMenu()
+    };
+
+    remove = () => {
+        if (!this.props.visible) {
+            this.props.removeMenu()
+        }
     };
 
     render() {
@@ -26,6 +32,7 @@ class Popup extends Component {
                     height={95}
                     measure={"%"}
                     visible={this.props.visible}
+                    onAnimationEnd={this.remove}
                     onClose={this.hide}
                 >
                     <div className="popup-menu-content">
@@ -39,17 +46,17 @@ class Popup extends Component {
     }
 }
 
-// comment
-
 const mapStateToProps = state => {
     return ({
-        visible: state.menu.visible
+        visible: state.menu.visible,
+        remove: state.menu.remove
     })
 };
 
 const mapDispatchToProps = {
     openMenu,
-    closeMenu
+    closeMenu,
+    removeMenu
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Popup);

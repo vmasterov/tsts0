@@ -1,5 +1,5 @@
 import React from "react";
-import lang from "../../static/lang.svg";
+// import lang from "../../static/lang.svg";
 import burger from "../../static/burger.svg";
 import {closeMenu, openMenu} from "../../services/menu/actions";
 import {connect} from "react-redux";

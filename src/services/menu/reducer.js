@@ -1,7 +1,8 @@
-import {OPEN_MENU, CLOSE_MENU} from "./types";
+import {OPEN_MENU, CLOSE_MENU, REMOVE_MENU} from "./types";
 
 const initialState = {
-    visible: false
+    visible: false,
+    remove: false
 };
 
 export default (state = initialState, action) => {
@@ -13,6 +14,10 @@ export default (state = initialState, action) => {
         case CLOSE_MENU:
             return {
                 visible: false
+            };
+        case REMOVE_MENU:
+            return {
+                remove: true
             };
         default:
             return state;

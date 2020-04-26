@@ -1,4 +1,4 @@
-import {OPEN_MENU, CLOSE_MENU} from "./types";
+import {OPEN_MENU, CLOSE_MENU, REMOVE_MENU} from "./types";
 
 export function openMenu() {
  return ({
@@ -9,5 +9,11 @@ export function openMenu() {
 export function closeMenu() {
     return ({
         type: CLOSE_MENU
+    })
+}
+
+export function removeMenu() {
+    return ({
+        type: REMOVE_MENU
     })
 }
