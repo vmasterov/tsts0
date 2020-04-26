@@ -1,10 +1,21 @@
 @import "../../variables";
 
+/************************************/
+/* Header */
+/************************************/
 .header{
   height: 100px;
   background-color: $accent;
 }
+/************************************/
+/* !Header */
+/************************************/
 
+
+
+/************************************/
+/* Logo */
+/************************************/
 .logo{
   position: relative;
   padding-left: 33px;
@@ -34,3 +45,49 @@ a.logo{
     transform: scale(1.1);
   }
 }
+/************************************/
+/* !Logo */
+/************************************/
+
+
+
+/************************************/
+/* Menu */
+/************************************/
+.menu-list{
+  display: none;
+  list-style: none;
+  li{
+    margin-right: 15px;
+    display: inline-block;
+    font-size: 14px;
+    //&:first-child{
+    //  opacity: 0.75;
+    //}
+    &:last-child{
+      margin-right: 0;
+    }
+    a{
+      color: $font;
+      img{
+        position: relative;
+        top: -2px;
+      }
+    }
+  }
+  @media (min-width: 576px){
+    display: block;
+  }
+}
+
+.burger{
+  position: relative;
+  top: 2px;
+  display: block;
+  @media (min-width: 576px){
+    display: none;
+  }
+}
+/************************************/
+/* !Menu */
+/************************************/

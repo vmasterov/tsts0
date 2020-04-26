@@ -5,7 +5,7 @@ export default () => {
     const logoNoLink = (<div className="logo justify-content-center align-self-center">tsts</div>);
 
     return (
-        <div className="col-sm">
+        <div className="col">
             {false ? logoLink : logoNoLink}
         </div>
     )

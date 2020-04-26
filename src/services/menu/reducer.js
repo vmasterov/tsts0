@@ -1,7 +1,7 @@
 import {OPEN_MENU, CLOSE_MENU} from "./types";
 
 const initialState = {
-    visible: true
+    visible: false
 };
 
 export default (state = initialState, action) => {
