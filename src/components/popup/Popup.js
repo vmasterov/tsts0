@@ -39,6 +39,8 @@ class Popup extends Component {
     }
 }
 
+// comment
+
 const mapStateToProps = state => {
     return ({
         visible: state.menu.visible
