@@ -1,8 +1,8 @@
+import "./header.scss"
 import React from "react";
 import Logo from "./Logo";
 import Menu from "./Menu";
 import Popup from "../popup/Popup";
-import "./header.scss"
 import {connect} from "react-redux";
 
 const menu = [

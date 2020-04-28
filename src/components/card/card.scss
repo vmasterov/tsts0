@@ -1,0 +1,39 @@
+@import "../../variables";
+
+.section-card{
+  margin-top: 30px;
+  padding: 20px;
+  display: block;
+  height: 140px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: $baseDark;
+  transition: 0.25s;
+  &:hover{
+    text-decoration: none;
+    transform: scale(1.1);
+  }
+  *{
+    display: block;
+  }
+  .section-logo{
+    margin: 0 auto;
+    width: 71px;
+    height: 71px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: $accent;
+    background-position: -7px -7px;
+  }
+  .section-name{
+    margin-top: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: $font;
+    font-size: 14px;
+    text-align: center;
+    text-overflow: ellipsis;
+  }
+}

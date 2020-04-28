@@ -1,0 +1,33 @@
+@import "../../variables";
+
+footer{
+  font-size: 14px;
+  line-height: 1.8;
+  .container{
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: calc(100% - 30px);
+      height: 1px;
+      background-color: $baseLight;
+    }
+  }
+  div{
+    text-align: center;
+    a{
+      color: $font;
+      &:hover{
+        color: $font;
+      }
+    }
+    @media (min-width: 576px){
+      text-align: left;
+    }
+  }
+}

@@ -1,8 +1,20 @@
 @import "variables";
 
+html,
+body,
+#root,
+.main-container{
+  height: 100% !important;
+}
+
 body{
   background-color: $base;
   color: $font;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
+}
+
+.header1{
+  font-size: 26px;
+  font-weight: 700;
 }

@@ -1,0 +1,9 @@
+@import "../../variables";
+
+.main-content{
+  margin-top: 70px;
+  .main-head{
+    padding-bottom: 15px;
+    border-bottom: 1px solid $baseLight;
+  }
+}
