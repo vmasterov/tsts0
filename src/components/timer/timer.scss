@@ -1,0 +1,10 @@
+@import "../../variables";
+
+.timer-inner{
+  padding-left: 32px;
+  background-image: url('../../static/timer.svg');
+  background-repeat: no-repeat;
+  background-position: 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+}
