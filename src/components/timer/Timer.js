@@ -12,14 +12,13 @@ class Timer extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            ...timer(this.props.time)
-        });
+        this.setState({...this.props.time});
 
         let intID = setInterval(() => {
-            this.setState({
-                ...timer(this.state)
-            });
+            if (!timer(this.state)) {
+                clearInterval(intID);
+            }
+            this.setState({...timer(this.state)});
         }, 1000);
     }
 
@@ -27,9 +26,9 @@ class Timer extends Component {
         return (
             <div className="timer d-flex justify-content-end">
                 <div className="timer-inner">
-                    <span className="timer-min">{this.state.min}</span>
+                    <span className="timer-min">{this.state.min < 10 ? '0' + this.state.min : this.state.min}</span>
                     <span className="timer-separator">:</span>
-                    <span className="timer-sec">{this.state.sec}</span>
+                    <span className="timer-sec">{this.state.sec < 10 ? '0' + this.state.sec : this.state.sec}</span>
                 </div>
             </div>
         )
@@ -37,10 +36,20 @@ class Timer extends Component {
 }
 
 function timer(state) {
-
-    return {
-        min: state.min - 1,
-        sec: state.sec
+    if (state.min === 0 && state.sec === 0) {
+        return false;
+    }
+    if (state.sec > 0) {
+        return ({
+            min: state.min,
+            sec: state.sec - 1
+        });
+    }
+    else {
+        return ({
+            min: state.min - 1,
+            sec: 59
+        });
     }
 }
 

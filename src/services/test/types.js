@@ -1,0 +1,1 @@
+export const GET_TEST = 'TEST/GET_TEST';

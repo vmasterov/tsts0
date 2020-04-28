@@ -1,5 +1,5 @@
 import empty from "../../static/empty.svg";
-import "./card.scss";
+import "./section.scss";
 import React from "react";
 
 export default ({section}) => {

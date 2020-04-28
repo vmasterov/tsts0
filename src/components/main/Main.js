@@ -1,10 +1,12 @@
 import "./main.scss"
 import React from "react";
 // import Search from "../search/Search";
-import {sections} from "./sections";
-import Card from "../card/Card";
+// import {sectionsArray} from "./sectionsArray";
+// import Section from "../section/Section";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import Timer from "../timer/Timer";
+import {connect} from "react-redux";
+import {getTest} from "../../services/test/action";
 
 const breadcrumbsArray = [
     {
@@ -18,20 +20,23 @@ const breadcrumbsArray = [
 ];
 
 const timerObject = {
-    min: 10,
-    sec: 0
+    min: 1,
+    sec: 5
 };
 
-
-export default () => {
+const Main = (props) => {
     // todo add "Show more" button (6 items)
-    const cards = sections.map((section, index) => {
+    /*const sections = sectionsArray.map((section, index) => {
         return (
             <div key={index} className="col-lg-3 col-md-4 col-sm-6 col-md-3">
-                <Card section={section} />
+                <Section section={section} />
             </div>
         )
-    });
+    });*/
+
+    const showTest = () => {
+        props.getTest();
+    };
 
     return (
         <main className="main-content">
@@ -42,7 +47,7 @@ export default () => {
                             <h1 className="header1 m-0">Категории</h1>
                         </div>
                         <div className="col-2">
-                            <Timer time={timerObject} />
+                            <Timer time={timerObject}/>
                         </div>
                     </div>
                     <div className="row">
@@ -53,9 +58,29 @@ export default () => {
                     </div>
                 </div>
                 <div className="row">
-                    {cards}
+                    {/*{sections}*/}
+
+                    <div className="col">
+                        <button onClick={showTest}>Show test</button>
+                        <p>{props.test.questions && props.test.questions[0].question}</p>
+                        <p>{props.test.questions && props.test.questions[1].question}</p>
+                    </div>
                 </div>
             </div>
         </main>
     )
-}
+};
+
+const matStateToProps = state => {
+    return ({
+        test: state.test
+    })
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getTest: () => dispatch(getTest())
+    }
+};
+
+export default connect(matStateToProps, mapDispatchToProps)(Main);
