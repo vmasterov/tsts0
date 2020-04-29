@@ -1,0 +1,25 @@
+@import "../../variables";
+
+.question {
+  .question-head {
+    padding: 16px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: $baseDark;
+    font-size: 18px;
+
+    .question-number {
+    }
+
+    .question-text {
+    }
+  }
+
+  .question-body{
+    padding: 16px 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: $baseLight;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+}

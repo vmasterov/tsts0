@@ -7,6 +7,7 @@ import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import Timer from "../timer/Timer";
 import {connect} from "react-redux";
 import {getTest} from "../../services/test/action";
+import Question from "../question/Question";
 
 const breadcrumbsArray = [
     {
@@ -64,6 +65,8 @@ const Main = (props) => {
                         <button onClick={showTest}>Show test</button>
                         <p>{props.test.questions && props.test.questions[0].question}</p>
                         <p>{props.test.questions && props.test.questions[1].question}</p>
+                        <hr/>
+                        <Question />
                     </div>
                 </div>
             </div>

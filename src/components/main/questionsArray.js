@@ -7,7 +7,10 @@ export const questionArray = {
               '2',
               '3',
               '4'
-          ]
+          ],
+          answer: '',
+          id: 1,
+          type: 'checkbox'
       },
       {
           question: '10 - 5',
@@ -16,7 +19,10 @@ export const questionArray = {
               '5',
               '7',
               '9'
-          ]
+          ],
+          answer: '',
+          id: 2,
+          type: 'checkbox'
       },
       {
           question: '1 / 0',
@@ -25,7 +31,10 @@ export const questionArray = {
               '10',
               '0',
               '1'
-          ]
+          ],
+          answer: '',
+          id: 3,
+          type: 'checkbox'
       }
   ],
   timer: {
