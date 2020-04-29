@@ -1,0 +1,59 @@
+@import "../../variables";
+
+.input-block {
+  position: relative;
+  margin-bottom: 18px;
+  padding-left: 30px;
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  input {
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ .input-fake {
+      border: none;
+      background-color: $accent;
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  .input-fake {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $fontDark;
+    border-radius: 3px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      display: none;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover{
+    input ~ .input-fake {}
+  }
+}
