@@ -21,11 +21,6 @@ const breadcrumbsArray = [
     }
 ];
 
-const timerObject = {
-    min: 1,
-    sec: 5
-};
-
 class Main extends Component {
     // todo add "Show more" button (6 items)
     /*const sections = sectionsArray.map((section, index) => {
@@ -62,7 +57,12 @@ class Main extends Component {
                                 <h1 className="header1 m-0">Категории</h1>
                             </div>
                             <div className="col-2">
-                                <Timer time={timerObject}/>
+                                {this.props.loading
+                                    ?
+                                    <Preloader/>
+                                    :
+                                    <Timer time={this.props.test.timer}/>
+                                }
                             </div>
                         </div>
                         <div className="row">
@@ -76,18 +76,15 @@ class Main extends Component {
                         {/*{sections}*/}
 
                         <div className="col">
-                            {/*<p>{props.test.questions && props.test.questions[0].question}</p>*/}
-                            {/*<p>{props.test.questions && props.test.questions[1].question}</p>*/}
-                            {/*<hr/>*/}
-
                             {this.props.loading
                                 ?
                                 <Preloader/>
                                 :
                                 <div>
-                                    <button onClick={this.showTest}>Show test</button>
+                                    <button onClick={this.showTest}>Next question: {this.state.current}</button>
                                     <Question
-                                        quest={this.props.test.questions[this.state.current]}
+                                        questions={this.props.test.questions}
+                                        current={this.state.current}
                                     />
                                 </div>
                             }

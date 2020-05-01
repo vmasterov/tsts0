@@ -1,5 +1,5 @@
-import {GET_TEST} from "./types";
-import {questionArray} from "../../components/main/questionsArray";
+import {GET_TEST, TOGGLE_CTRL} from "./types"
+import {questionObject} from "../../components/main/questionsObject";
 import {hideLoader, showLoader} from "../preloader/action";
 
 export function getTest() {
@@ -10,14 +10,21 @@ export function getTest() {
             setTimeout(() => {
                 dispatch({
                     type: GET_TEST,
-                    payload: questionArray
+                    payload: questionObject
                 });
 
                 dispatch(hideLoader());
-            }, 3000)
+            }, 1000)
         }
         catch (error) {
             console.log(error);
         }
+    }
+}
+
+export function toggleCtrl(id, value, checked) {
+    return {
+        type: TOGGLE_CTRL,
+        payload: {id, value, checked}
     }
 }

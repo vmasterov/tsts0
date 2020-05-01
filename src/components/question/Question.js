@@ -1,20 +1,30 @@
 import "./questuin.scss"
 import React from "react";
-import Checkbox from "../controls/checkbox/Checkbox";
-// import Radio from "../controls/radio/Radio";
+import Control from "../controls/Control.js";
 
 export default (props) => {
     return (
         <div className="question">
             <div className="question-head d-flex">
-                <div className="question-number">4 из 5</div>
-                <div className="question-text">Что вернёт typeof {props.quest.question}</div>
+                <div className="question-number">{props.current + 1} из {props.questions.length}</div>
+                <div className="question-text">{props.questions[props.current].question}</div>
             </div>
             <div className="question-body">
-                <Checkbox />
-                <Checkbox />
-                <Checkbox />
-                <Checkbox />
+                {
+                    props.questions[props.current].answers.map((item, index) => {
+                        return (
+                            <Control
+                                key={index}
+                                text={item.text}
+                                name={item.name}
+                                value={item.value}
+                                id={props.questions[props.current].id}
+                                answ={props.questions[props.current].answer}
+                                type={props.questions[props.current].type}
+                            />
+                        )
+                    })
+                }
             </div>
         </div>
     )
