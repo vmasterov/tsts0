@@ -1,5 +1,8 @@
 import "./timer.scss"
 import React, {Component} from "react";
+import {getTimer} from "./getTimer";
+import {pageResult} from "../../services/pages/actions";
+import {connect} from "react-redux";
 
 class Timer extends Component {
     constructor(props) {
@@ -14,12 +17,19 @@ class Timer extends Component {
     componentDidMount() {
         this.setState({...this.props.time});
 
-        let intID = setInterval(() => {
-            if (!timer(this.state)) {
-                clearInterval(intID);
+        this.intID = setInterval(() => {
+            if (!getTimer(this.state)) {
+                clearInterval(this.intID);
+                this.props.result();
             }
-            this.setState({...timer(this.state)});
+            else {
+                this.setState({...getTimer(this.state)});
+            }
         }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intID);
     }
 
     render() {
@@ -35,22 +45,12 @@ class Timer extends Component {
     }
 }
 
-function timer(state) {
-    if (state.min === 0 && state.sec === 0) {
-        return false;
+const mapDispatchToProps = dispatch => {
+    return {
+        result: () => dispatch(pageResult())
     }
-    if (state.sec > 0) {
-        return ({
-            min: state.min,
-            sec: state.sec - 1
-        });
-    }
-    else {
-        return ({
-            min: state.min - 1,
-            sec: 59
-        });
-    }
-}
+};
 
-export default Timer;
+
+
+export default connect(null, mapDispatchToProps)(Timer);

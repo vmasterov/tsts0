@@ -114,7 +114,7 @@ export const questionObject = {
       }
   ],
   timer: {
-      min: 1,
-      sec: 0
+      min: 5,
+      sec: 5
   }
 };

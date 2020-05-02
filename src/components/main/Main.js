@@ -1,95 +1,29 @@
 import "./main.scss"
 import React, {Component} from "react";
-// import Search from "../search/Search";
-// import {sectionsArray} from "./sectionsArray";
-// import Section from "../section/Section";
-import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
-import Timer from "../timer/Timer";
 import {connect} from "react-redux";
-import {getTest} from "../../services/test/action";
-import Question from "../question/Question";
 import Preloader from "../preloader/Preloader";
-
-const breadcrumbsArray = [
-    {
-        name: 'JavaScript',
-        link: '/'
-    },
-    {
-        name: 'Основы JavaScript',
-        link: ''
-    }
-];
+import Caption from "../caption/Caption";
+import Test from "../test/Test";
+import Sections from "../sections/Sections";
 
 class Main extends Component {
-    // todo add "Show more" button (6 items)
-    /*const sections = sectionsArray.map((section, index) => {
-        return (
-            <div key={index} className="col-lg-3 col-md-4 col-sm-6 col-md-3">
-                <Section section={section} />
-            </div>
-        )
-    });*/
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            current: 0
-        }
-    }
-
-    showTest = () => {
-        this.setState(prevState => ({current: prevState.current + 1}));
-    };
-
-    componentDidMount() {
-        this.props.getTest();
-    }
-
     render() {
         return (
             <main className="main-content">
                 <div className="container">
-                    <div className="main-head">
-                        <div className="row">
-                            <div className="col-10">
-                                <h1 className="header1 m-0">Категории</h1>
-                            </div>
-                            <div className="col-2">
-                                {this.props.loading
-                                    ?
-                                    <Preloader/>
-                                    :
-                                    <Timer time={this.props.test.timer}/>
-                                }
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                {/*<Search />*/}
-                                <Breadcrumbs breadcrumbsArray={breadcrumbsArray}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        {/*{sections}*/}
+                    <Caption
+                        timer={this.props.test.timer}
+                        loading={this.props.loading}
+                        page={this.props.page}
+                    />
 
-                        <div className="col">
-                            {this.props.loading
-                                ?
-                                <Preloader/>
-                                :
-                                <div>
-                                    <button onClick={this.showTest}>Next question: {this.state.current}</button>
-                                    <Question
-                                        questions={this.props.test.questions}
-                                        current={this.state.current}
-                                    />
-                                </div>
-                            }
-                        </div>
-                    </div>
+                    {this.props.page === 'sections' && <Sections/>}
+
+                    {this.props.page === 'test' &&
+                        (this.props.loading ? <Preloader/> : <Test test={this.props.test}/>)
+                    }
+
+                    {this.props.page === 'result' && <div className="row"><h1>Page result </h1></div>}
                 </div>
             </main>
         )
@@ -99,14 +33,9 @@ class Main extends Component {
 const matStateToProps = state => {
     return ({
         test: state.test,
-        loading: state.loading.loading
+        loading: state.loading.loading,
+        page: state.pages.page
     })
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getTest: () => dispatch(getTest())
-    }
-};
-
-export default connect(matStateToProps, mapDispatchToProps)(Main);
+export default connect(matStateToProps, null)(Main);
