@@ -1,0 +1,1 @@
+export const GET_SECTIONS = 'TEST/GET_SECTIONS';
