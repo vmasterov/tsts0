@@ -17,21 +17,12 @@ class Popup extends Component {
     };
 
     render() {
-        // const menu = this.props.content.map((item, index) => {
-        //     return (
-        //         <li key={index}>
-        //             <a href={item.link}>{item.name}</a>
-        //         </li>
-        //     );
-        // });
-
-
         return (
             <div>
                 <Rodal
-                    width={95}
-                    height={95}
-                    measure={"%"}
+                    width={this.props.width}
+                    height={this.props.height}
+                    measure={this.props.measure}
                     visible={this.props.visible}
                     onAnimationEnd={this.remove}
                     onClose={this.hide}

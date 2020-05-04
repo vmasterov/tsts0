@@ -1,5 +1,21 @@
 @import "../../variables";
 
-.popup-content{
+.popup-content {
   color: $baseDark;
+}
+
+.questions-list {
+  margin: 20px 0 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: 0.25s;
+
+    &:hover{
+      color: $accent;
+    }
+  }
 }

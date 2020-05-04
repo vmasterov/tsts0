@@ -13,22 +13,22 @@ class Test extends Component {
         };
     }
 
-    lalka = id => {
+    goToQuestion = id => {
         this.setState({current: id});
         this.props.closePopup();
     };
 
     showMap = () => {
         const questions =
-            <ul>
+            <ul className="questions-list">
                 {
                     this.props.test.questions.map((question, index) => {
                         return (
                             <li
                                 key={index}
-                                onClick={() => this.lalka(index)}
+                                onClick={() => this.goToQuestion(index)}
                             >
-                                {question.question}
+                                {(question.answer.length ? '+ ' : '- ') + question.question}
                             </li>
                         );
                     })
@@ -83,7 +83,15 @@ class Test extends Component {
                         />
                     </div>
 
-                    {!this.props.showPopup && <Popup content={this.state.questions}/>}
+                    {!this.props.showPopup &&
+                        <Popup
+                            content={this.state.questions}
+                            width={window.innerWidth > 576 ? 500 : 95}
+                            height={window.innerWidth > 576 ? 400 : 95}
+                            measure={window.innerWidth > 576 ? 'px' : '%'}
+
+                        />
+                    }
                 </div>
             </div>
         )

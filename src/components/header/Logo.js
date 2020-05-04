@@ -1,12 +1,12 @@
 import React from "react";
 
-export default () => {
+export default (props) => {
     const logoLink = (<a href="/" className="logo justify-content-center align-self-center">tsts</a>);
     const logoNoLink = (<div className="logo justify-content-center align-self-center">tsts</div>);
 
     return (
         <div className="col">
-            {false ? logoLink : logoNoLink}
+            {props.page === 'sections' ? logoNoLink : logoLink}
         </div>
     )
 }
