@@ -6,24 +6,27 @@ class Search extends Component {
         super(props);
 
         this.state = {
-            searchString: 'Найти'
+            searchString: ''
         }
     }
-
-    clearVal = event => {};
 
     changeVal = event => {
         event.persist();
 
         this.setState(state => {
-            return {...state, ...{[event.target.name]: [event.target.value]}}
+            this.props.getSearch(event.target.value);
+            return {...state, ...{[event.target.name]: event.target.value}}
         });
     };
 
-    // todo: add formik
+    submit = event => {
+        event.preventDefault();
+        this.props.getSearch(this.state.searchString);
+    };
+
     render() {
         return (
-            <form action="">
+            <form action="" onSubmit={this.submit}>
                 <div className="search-block d-flex">
                     <label
                         className="search-label m-0"
@@ -34,9 +37,9 @@ class Search extends Component {
                         className="search-input flex-grow-1"
                         type="text"
                         value={this.state.searchString}
-                        onFocus={this.clearVal}
                         onChange={this.changeVal}
                         name="searchString"
+                        placeholder="Найти"
                     />
                 </div>
             </form>

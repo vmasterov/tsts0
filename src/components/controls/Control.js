@@ -1,7 +1,5 @@
 import "./controls.scss";
 import React from "react";
-import {toggleCtrl} from "../../services/test/action";
-import {connect} from "react-redux";
 
 const Control = (props) => {
     const change = event => {
@@ -23,10 +21,4 @@ const Control = (props) => {
     )
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        toggleCtrl: (id, value, checked) => dispatch(toggleCtrl(id, value, checked))
-    }
-};
-
-export default connect(null, mapDispatchToProps)(Control);
+export default Control;

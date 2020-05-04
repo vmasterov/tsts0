@@ -1,3 +1,4 @@
+import './popup.scss';
 import React, {Component} from 'react';
 import Rodal from 'rodal';
 import {connect} from "react-redux";
@@ -16,13 +17,13 @@ class Popup extends Component {
     };
 
     render() {
-        const menu = this.props.content.map((item, index) => {
-            return (
-                <li key={index}>
-                    <a href={item.link}>{item.name}</a>
-                </li>
-            );
-        });
+        // const menu = this.props.content.map((item, index) => {
+        //     return (
+        //         <li key={index}>
+        //             <a href={item.link}>{item.name}</a>
+        //         </li>
+        //     );
+        // });
 
 
         return (
@@ -35,10 +36,8 @@ class Popup extends Component {
                     onAnimationEnd={this.remove}
                     onClose={this.hide}
                 >
-                    <div className="popup-menu-content">
-                        <ul className="m-0 p-0">
-                            {menu}
-                        </ul>
+                    <div className="popup-content">
+                        {this.props.content}
                     </div>
                 </Rodal>
             </div>

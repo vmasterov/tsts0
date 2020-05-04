@@ -1,27 +1,56 @@
 import React, {Component} from "react";
-import Question from "../question/Question";
+import Question from "./question/Question";
 import Button from "../button/Button";
-import {pageResult} from "../../services/pages/actions";
-import {connect} from "react-redux";
+import Popup from "../popup/Popup";
 
 class Test extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            current: 0
+            current: 0,
+            questions: []
         };
     }
 
-    click = () => {
+    lalka = id => {
+        this.setState({current: id});
+        this.props.closePopup();
+    };
+
+    showMap = () => {
+        const questions =
+            <ul>
+                {
+                    this.props.test.questions.map((question, index) => {
+                        return (
+                            <li
+                                key={index}
+                                onClick={() => this.lalka(index)}
+                            >
+                                {question.question}
+                            </li>
+                        );
+                    })
+                }
+            </ul>;
+        this.setState({questions: questions});
+        this.props.openPopup();
+    };
+
+    setAnswer = () => {
         this.setState(prevState => {
                 if ((this.props.test.questions.length - 1) === prevState.current) {
-                    this.props.pageResult()
+                    this.props.pageResult();
                 } else {
-                    return {current: prevState.current + 1}
+                    return {current: prevState.current + 1};
                 }
             }
         );
+    };
+
+    endTest = () => {
+        this.props.pageResult();
     };
 
     render() {
@@ -31,37 +60,34 @@ class Test extends Component {
                     <Question
                         questions={this.props.test.questions}
                         current={this.state.current}
+                        toggleCtrl={this.props.toggleCtrl}
                     />
 
-                    <div className="controls d-flex justify-content-end">
+                    <div className="controls d-md-flex justify-content-end">
                         <Button
                             name='Карта теста'
                             classes='button'
-                            click={this.click}
+                            click={this.showMap}
                         />
 
                         <Button
                             name='Ответить'
                             classes='button button-accent'
-                            click={this.click}
+                            click={this.setAnswer}
                         />
 
                         <Button
                             name='Завершить'
                             classes='button'
-                            click={this.click}
+                            click={this.endTest}
                         />
                     </div>
+
+                    {!this.props.showPopup && <Popup content={this.state.questions}/>}
                 </div>
             </div>
         )
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        pageResult: () => dispatch(pageResult())
-    }
-};
-
-export default connect(null, mapDispatchToProps)(Test);
+export default Test;

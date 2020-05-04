@@ -1,9 +1,6 @@
-import empty from "../../static/empty.svg";
+import empty from "../../../static/empty.svg";
 import "./section.scss";
 import React from "react";
-import {connect} from "react-redux";
-import {pageTest} from "../../services/pages/actions";
-import {getTest} from "../../services/test/action";
 
 const Section = (props) => {
     // todo show full section's caption by hover
@@ -26,11 +23,4 @@ const Section = (props) => {
     )
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        pageTest: () => dispatch(pageTest()),
-        getTest: () => dispatch(getTest())
-    }
-};
-
-export default connect(null, mapDispatchToProps)(Section);
+export default Section;

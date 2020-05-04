@@ -1,23 +1,27 @@
 import React, {Component} from "react";
-import Section from "../section/Section";
-import {connect} from "react-redux";
-import {getSections} from "../../services/sections/action";
+import Section from "./section/Section";
 
 class Sections extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.getSections()
     }
 
     render() {
-        console.log(this.props.sections.sections);
-        const sections = this.props.sections.sections.map((section, index) => {
+        const filteredSections = this.props.sections.sections.filter(section => {
+            const name = section.name.toLowerCase();
+            const find = this.props.search.toLowerCase();
+
+            return name.includes(find);
+        });
+
+        const sections = filteredSections.map((section, index) => {
             return (
                 <div key={index} className="col-lg-3 col-md-4 col-sm-6 col-md-3">
-                    <Section section={section}/>
+                    <Section
+                        section={section}
+                        getTest={this.props.getTest}
+                        pageTest={this.props.pageTest}
+                    />
                 </div>
             )
         });
@@ -30,16 +34,4 @@ class Sections extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        sections: state.sections
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getSections: () => dispatch(getSections())
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sections);
+export default Sections;

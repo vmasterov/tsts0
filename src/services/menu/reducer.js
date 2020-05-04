@@ -2,7 +2,7 @@ import {OPEN_MENU, CLOSE_MENU, REMOVE_MENU} from "./types";
 
 const initialState = {
     visible: false,
-    remove: false
+    show: true
 };
 
 export default (state = initialState, action) => {
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
             };
         case REMOVE_MENU:
             return {
-                remove: true
+                show: true
             };
         default:
             return state;

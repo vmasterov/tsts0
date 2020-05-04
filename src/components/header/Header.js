@@ -1,20 +1,20 @@
 import "./header.scss"
 import React from "react";
 import Logo from "./Logo";
-import Menu from "./Menu";
-import Popup from "../popup/Popup";
+// import Menu from "./Menu";
+// import Popup from "../popup/Popup";
 import {connect} from "react-redux";
 
-const menu = [
-    {
-        name: 'Вход',
-        link: '/'
-    },
-    {
-        name: 'Регистрация',
-        link: '/'
-    }
-];
+// const menu = [
+//     {
+//         name: 'Вход',
+//         link: '/'
+//     },
+//     {
+//         name: 'Регистрация',
+//         link: '/'
+//     }
+// ];
 
 const Header = (props) => {
     return (
@@ -22,8 +22,9 @@ const Header = (props) => {
             <div className="container align-self-center">
                 <div className="row">
                     <Logo />
-                    <Menu content={menu} />
-                    {!props.remove && <Popup content={menu} />}
+
+                    {/*<Menu content={menu} />*/}
+                    {/*{!props.remove && <Popup content={menu} />}*/}
                 </div>
             </div>
         </header>

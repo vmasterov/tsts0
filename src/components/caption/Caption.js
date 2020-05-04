@@ -1,8 +1,8 @@
 import React from "react";
-import Timer from "../timer/Timer";
-import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
-import Search from "../search/Search";
-
+import Timer from "./timer/Timer";
+// import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import Search from "./search/Search";
+/*
 const breadcrumbsArray = [
     {
         name: 'JavaScript',
@@ -13,9 +13,17 @@ const breadcrumbsArray = [
         link: ''
     }
 ];
-
+*/
 export default (props) => {
-    const timer = props.loading ? '' : <Timer time={props.timer} result={props.result}/>;
+    const timer = props.loading
+        ?
+        ''
+        :
+        <Timer
+            time={props.timer}
+            result={props.result}
+            pageResult={props.pageResult}
+        />;
 
     return (
         <div className="main-head">
@@ -29,8 +37,12 @@ export default (props) => {
             </div>
             <div className="row">
                 <div className="col">
-                    {props.page === "sections" && <Search />}
-                    {props.page !== "sections" && <Breadcrumbs breadcrumbsArray={breadcrumbsArray}/>}
+                    {props.page === "sections" &&
+                        <Search
+                            getSearch={props.getSearch}
+                        />
+                    }
+                    {/*{props.page !== "sections" && <Breadcrumbs breadcrumbsArray={breadcrumbsArray}/>}*/}
                 </div>
             </div>
         </div>

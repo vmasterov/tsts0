@@ -1,0 +1,1 @@
+export const SEARCH = 'SECTIONS/SEARCH';

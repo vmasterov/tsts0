@@ -1,9 +1,9 @@
 import {OPEN_MENU, CLOSE_MENU, REMOVE_MENU} from "./types";
 
 export function openMenu() {
- return ({
-     type: OPEN_MENU
- })
+    return ({
+        type: OPEN_MENU
+    })
 }
 
 export function closeMenu() {
