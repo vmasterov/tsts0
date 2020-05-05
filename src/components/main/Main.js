@@ -6,10 +6,11 @@ import Caption from "../caption/Caption";
 import Test from "../test/Test";
 import Sections from "../sections/Sections";
 import {getSections} from "../../services/sections/action";
-import {pageResult, pageTest} from "../../services/pages/actions";
+import {pageResult, pageSections, pageTest} from "../../services/pages/actions";
 import {getTest, toggleCtrl} from "../../services/test/action";
 import {getSearch} from "../../services/search/action";
 import {closeMenu, openMenu} from "../../services/menu/actions";
+import Result from "../result/Result";
 
 class Main extends Component {
     render() {
@@ -41,16 +42,23 @@ class Main extends Component {
                             :
                             <Test
                                 test={this.props.test}
-                                pageResult={this.props.pageResult}
                                 toggleCtrl={this.props.toggleCtrl}
                                 showPopup={this.props.show}
                                 openPopup={this.props.openMenu}
                                 closePopup={this.props.closeMenu}
+                                pageResult={this.props.pageResult}
                             />
                         )
                     }
 
-                    {this.props.page === 'result' && <div className="row"><h1>Page result </h1></div>}
+                    {this.props.page === 'result' &&
+                        <Result
+                           test={this.props.test.questions}
+                           pageResult={this.props.pageResult}
+                           pageSections={this.props.pageSections}
+                           pageTest={this.props.pageTest}
+                        />
+                    }
                 </div>
             </main>
         )
@@ -74,6 +82,7 @@ const mapDispatchToProps = dispatch => {
         getTest: () => dispatch(getTest()),
         pageTest: () => dispatch(pageTest()),
         pageResult: () => dispatch(pageResult()),
+        pageSections: () => dispatch(pageSections()),
         toggleCtrl: (id, value, checked) => dispatch(toggleCtrl(id, value, checked)),
         getSearch: (find) => dispatch(getSearch(find)),
         openMenu: () => dispatch(openMenu()),

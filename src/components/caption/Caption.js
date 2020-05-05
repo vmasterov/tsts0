@@ -25,11 +25,28 @@ export default (props) => {
             pageResult={props.pageResult}
         />;
 
+    let caption;
+    switch (props.page) {
+        case 'sections':
+            caption = 'Категории';
+            break;
+        case 'test':
+            caption = 'Основы JavaScript';
+            break;
+        case 'result':
+            caption = 'Основы JavaScript: результаты';
+            break;
+        default:
+            caption = 'Категории';
+    }
+
     return (
         <div className="main-head">
             <div className="row">
                 <div className="col-10">
-                    <h1 className="header1 m-0">Категории</h1>
+                    <h1 className="header1 m-0">
+                        {caption}
+                    </h1>
                 </div>
                 <div className="col-2">
                     {props.page === "test" && timer}

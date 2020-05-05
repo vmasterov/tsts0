@@ -1,0 +1,35 @@
+@import "../../variables";
+
+.results{
+  margin-top: 20px;
+}
+
+.results-ratio{
+  width: 255px;
+  height: 255px;
+  border: 45px solid $accent;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-color: $baseLight;
+  font-size: 80px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 165px;
+}
+
+.results-quantity{
+  font-size: 70px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.results-buttons{
+  text-align: center;
+
+  .button{
+    margin: 10px 0 0 0;
+    width: 220px;
+    background-color: #14A9AD;
+  }
+}
