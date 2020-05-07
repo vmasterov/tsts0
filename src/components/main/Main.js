@@ -11,6 +11,8 @@ import {getTest, toggleCtrl} from "../../services/test/action";
 import {getSearch} from "../../services/search/action";
 import {closeMenu, openMenu} from "../../services/menu/actions";
 import Result from "../result/Result";
+import {Route, Switch} from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 
 class Main extends Component {
     render() {
@@ -20,45 +22,80 @@ class Main extends Component {
                     <Caption
                         timer={this.props.test.timer}
                         loading={this.props.loading}
-                        page={this.props.page}
-                        pageResult={this.props.pageResult}
+                        // page={this.props.page}
+                        // pageResult={this.props.pageResult}
                         getSearch={this.props.getSearch}
                     />
 
-                    {this.props.page === 'sections' &&
-                        <Sections
-                            getSections={this.props.getSections}
-                            getTest={this.props.getTest}
-                            pageTest={this.props.pageTest}
-                            sections={this.props.sections}
-                            search={this.props.search}
-                        />
-                    }
-
-                    {this.props.page === 'test' &&
-                        (this.props.loading
-                            ?
-                            <Preloader/>
-                            :
+                    <Switch>
+                        <Route path='/test'>
                             <Test
+                                loading={this.props.loading}
                                 test={this.props.test}
                                 toggleCtrl={this.props.toggleCtrl}
                                 showPopup={this.props.show}
                                 openPopup={this.props.openMenu}
                                 closePopup={this.props.closeMenu}
-                                pageResult={this.props.pageResult}
+                                // pageResult={this.props.pageResult}
                             />
-                        )
-                    }
+                        </Route>
 
-                    {this.props.page === 'result' &&
-                        <Result
-                           test={this.props.test.questions}
-                           pageResult={this.props.pageResult}
-                           pageSections={this.props.pageSections}
-                           pageTest={this.props.pageTest}
-                        />
-                    }
+                        <Route path='/result'>
+                            <Result
+                                test={this.props.test.questions}
+                                // pageResult={this.props.pageResult}
+                                // pageSections={this.props.pageSections}
+                                // pageTest={this.props.pageTest}
+                            />
+                        </Route>
+
+                        <Route path='/'>
+                            <Sections
+                                getSections={this.props.getSections}
+                                getTest={this.props.getTest}
+                                // pageTest={this.props.pageTest}
+                                sections={this.props.sections}
+                                search={this.props.search}
+                            />
+                        </Route>
+                    </Switch>
+
+
+                    {/*{this.props.page === 'sections' &&*/}
+                    {/*    <Sections*/}
+                    {/*        getSections={this.props.getSections}*/}
+                    {/*        getTest={this.props.getTest}*/}
+                    {/*        pageTest={this.props.pageTest}*/}
+                    {/*        sections={this.props.sections}*/}
+                    {/*        search={this.props.search}*/}
+                    {/*    />*/}
+                    {/*}*/}
+
+                    {/*{this.props.page === 'test' &&*/}
+                    {/*    (this.props.loading*/}
+                    {/*        ?*/}
+                    {/*        <Preloader/>*/}
+                    {/*        :*/}
+                    {/*        <Test*/}
+                    {/*            test={this.props.test}*/}
+                    {/*            toggleCtrl={this.props.toggleCtrl}*/}
+                    {/*            showPopup={this.props.show}*/}
+                    {/*            openPopup={this.props.openMenu}*/}
+                    {/*            closePopup={this.props.closeMenu}*/}
+                    {/*            pageResult={this.props.pageResult}*/}
+                    {/*        />*/}
+                    {/*    )*/}
+                    {/*}*/}
+
+                    {/*{this.props.page === 'result' &&*/}
+                    {/*    <Result*/}
+                    {/*       test={this.props.test.questions}*/}
+                    {/*       pageResult={this.props.pageResult}*/}
+                    {/*       pageSections={this.props.pageSections}*/}
+                    {/*       pageTest={this.props.pageTest}*/}
+                    {/*    />*/}
+                    {/*}*/}
+
                 </div>
             </main>
         )
@@ -69,7 +106,7 @@ const matStateToProps = state => {
     return ({
         test: state.test,
         loading: state.loading.loading,
-        page: state.pages.page,
+        // page: state.pages.page,
         sections: state.sections,
         search: state.search,
         show: state.menu.show
@@ -80,15 +117,16 @@ const mapDispatchToProps = dispatch => {
     return {
         getSections: () => dispatch(getSections()),
         getTest: () => dispatch(getTest()),
-        pageTest: () => dispatch(pageTest()),
-        pageResult: () => dispatch(pageResult()),
-        pageSections: () => dispatch(pageSections()),
+        // pageTest: () => dispatch(pageTest()),
+        // pageResult: () => dispatch(pageResult()),
+        // pageSections: () => dispatch(pageSections()),
         toggleCtrl: (id, value, checked) => dispatch(toggleCtrl(id, value, checked)),
         getSearch: (find) => dispatch(getSearch(find)),
         openMenu: () => dispatch(openMenu()),
         closeMenu: () => dispatch(closeMenu())
 
-}
+    }
 };
 
-export default connect(matStateToProps, mapDispatchToProps)(Main);
+// export default connect(matStateToProps, mapDispatchToProps)(Main);
+export default withRouter(connect(matStateToProps, mapDispatchToProps)(Main));

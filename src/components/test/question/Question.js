@@ -3,6 +3,7 @@ import React from "react";
 import Control from "../../controls/Control";
 
 export default (props) => {
+    console.log(props.questions, props.current);
     return (
         <div className="question">
             <div className="question-head d-md-flex">

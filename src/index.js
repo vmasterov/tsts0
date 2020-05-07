@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {rootReducer} from "./services/rootReducer";
 import App from './App';
+import {HashRouter as Router} from "react-router-dom";
 
 const store = createStore(
     rootReducer,
@@ -21,7 +22,9 @@ const store = createStore(
 
 const app = (
     <Provider store={store}>
-        <App/>
+        <Router>
+            <App/>
+        </Router>
     </Provider>
 );
 

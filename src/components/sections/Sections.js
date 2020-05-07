@@ -20,7 +20,7 @@ class Sections extends Component {
                     <Section
                         section={section}
                         getTest={this.props.getTest}
-                        pageTest={this.props.pageTest}
+                        // pageTest={this.props.pageTest}
                     />
                 </div>
             )

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Question from "./question/Question";
 import Button from "../button/Button";
 import Popup from "../popup/Popup";
+import Preloader from "../preloader/Preloader";
 
 class Test extends Component {
     constructor(props) {
@@ -53,8 +54,12 @@ class Test extends Component {
         this.props.pageResult();
     };
 
-    render() {
-        return (
+    render = () => {
+        console.log(this.props);
+        const q = this.props.loading
+            ?
+            <Preloader/>
+            :
             <div className="row">
                 <div className="col">
                     <Question
@@ -84,17 +89,18 @@ class Test extends Component {
                     </div>
 
                     {!this.props.showPopup &&
-                        <Popup
-                            content={this.state.questions}
-                            width={window.innerWidth > 576 ? 500 : 95}
-                            height={window.innerWidth > 576 ? 400 : 95}
-                            measure={window.innerWidth > 576 ? 'px' : '%'}
+                    <Popup
+                        content={this.state.questions}
+                        width={window.innerWidth > 576 ? 500 : 95}
+                        height={window.innerWidth > 576 ? 400 : 95}
+                        measure={window.innerWidth > 576 ? 'px' : '%'}
 
-                        />
+                    />
                     }
                 </div>
-            </div>
-        )
+            </div>;
+
+        return <div>{q}</div>;
     }
 }
 

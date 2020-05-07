@@ -21,7 +21,8 @@ const Header = (props) => {
         <header className="header d-flex">
             <div className="container align-self-center">
                 <div className="row">
-                    <Logo page={props.page}/>
+                    {/*<Logo page={props.page}/>*/}
+                    <Logo />
 
                     {/*<Menu content={menu} />*/}
                     {/*{!props.remove && <Popup content={menu} />}*/}
@@ -31,6 +32,7 @@ const Header = (props) => {
     )
 };
 
+/*
 const mapStateToProps = state => {
     return ({
         remove: state.menu.remove,
@@ -39,3 +41,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, null)(Header);
+*/
+export default Header;

@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
     menu: menuReducer,
     test: testReducer,
     loading: loadReducer,
-    pages: Pages,
+    // pages: Pages,
     sections: Sections,
     search: Search
 });
