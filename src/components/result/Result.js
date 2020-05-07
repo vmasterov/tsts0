@@ -1,19 +1,19 @@
 import './result.scss';
 import React from "react";
 import rightAnswers from "./answers.json"
-import Button from "../button/Button";
-import Test from "../test/Test";
+// import Button from "../button/Button";
+// import Test from "../test/Test";
 
 export default (props) => {
     const results = getResults(props.test, rightAnswers.questions);
 
-    const goToMain = () => {
-        props.pageSections();
-    };
-
-    const goToTest = () => {
-        props.pageTest()
-    };
+    // const goToMain = () => {
+    //     props.pageSections();
+    // };
+    //
+    // const goToTest = () => {
+    //     props.pageTest()
+    // };
 
     return (
         <div className="row results">
@@ -27,22 +27,23 @@ export default (props) => {
                 </div>
 
                 <div className="results-buttons">
-                    <Button
-                        name='Пройти ещё раз'
-                        classes='button button-accent'
-                        click={goToTest}
-                    />
+                    {/*<Button*/}
+                    {/*    name='Пройти ещё раз'*/}
+                    {/*    classes='button button-accent'*/}
+                    {/*    click={goToTest}*/}
+                    {/*/>*/}
 
-                    <Button
-                        name='На главную'
-                        classes='button button-accent'
-                        click={goToMain}
-                    />
+                    {/*<Button*/}
+                    {/*    name='На главную'*/}
+                    {/*    classes='button button-accent'*/}
+                    {/*    click={goToMain}*/}
+                    {/*/>*/}
+                    <a href="/" className='button button-accent'>На главную</a>
                 </div>
             </div>
 
             <div className="col-md-8 offset-md-1">
-                <ul>
+                <ul className="result-list">
                     {results.layout}
                 </ul>
             </div>
@@ -59,7 +60,7 @@ function getResults(questions, rightAnswers) {
 
         return (
             <li key={qIndex}>{question.question}
-                <ul>
+                <ul className="result-list result-list-answers">
                     {
                         question.answers.map((answerObj, aIndex, aArray) => {
                             let rightAnswerArr = rightAnswers[qIndex].answer;
@@ -72,7 +73,7 @@ function getResults(questions, rightAnswers) {
                             }
 
                             return (
-                                <li key={aIndex}>
+                                <li key={aIndex} className={checkedAnswerObj.classes}>
                                     {checkedAnswerObj.curAnsw}
                                 </li>
                             )
@@ -96,19 +97,24 @@ function checkAnswer(userAnswerObj, userAnswArr, rightAnswArr) {
     let rightVar = rightAnswArr.includes(userAnswerObj.value);
     let curAnsw = '';
     let rightVariantCount = 0;
+    let classes = '';
 
     if (userVar && rightVar) {
         curAnsw = '++ ' + userAnswerObj.text;
+        classes = 'right';
         ++rightVariantCount;
     } else if (userVar) {
         curAnsw = '- ' + userAnswerObj.text;
+        classes = 'wrong';
         --rightVariantCount;
     } else if (rightVar) {
         curAnsw = '+- ' + userAnswerObj.text;
+        classes = 'part';
         --rightVariantCount;
     } else {
         curAnsw = '0 ' + userAnswerObj.text;
+        classes = 'empty';
     }
 
-    return {curAnsw, rightVariantCount};
+    return {curAnsw, rightVariantCount, classes};
 }

@@ -5,31 +5,158 @@
 }
 
 .results-ratio{
-  width: 255px;
-  height: 255px;
-  border: 45px solid $accent;
+  display: none;
+  width: 150px;
+  height: 150px;
+  border: 25px solid $accent;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 105px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
   background-color: $baseLight;
-  font-size: 80px;
-  font-weight: 700;
   text-align: center;
-  line-height: 165px;
+
+  @media (min-width: 768px){
+    display: block;
+  }
+
+  @media (min-width: 992px){
+    width: 210px;
+    height: 210px;
+    border: 35px solid #14A9AD;
+    font-size: 70px;
+    line-height: 145px;
+  }
+
+  @media (min-width: 1199px){
+    width: 255px;
+    height: 255px;
+    border: 45px solid $accent;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 165px;
+  }
 }
 
 .results-quantity{
-  font-size: 70px;
+  font-size: 45px;
   font-weight: 700;
   text-align: center;
+
+  @media (min-width: 1199px){
+    font-size: 70px;
+  }
+
+  @media (min-width: 992px){
+    font-size: 55px;
+  }
 }
 
 .results-buttons{
   text-align: center;
 
   .button{
-    margin: 10px 0 0 0;
-    width: 220px;
+    margin: 10px 0 40px 0;
+    padding: 10px 30px;
+    width: 100%;
     background-color: #14A9AD;
+
+    @media (min-width: 992px){
+      width: 220px;
+    }
+  }
+
+  a:hover{
+    color: $font;
+    text-decoration: none;
+  }
+
+  @media (min-width: 768px){
+    margin-bottom: 0;
+  }
+}
+
+.result-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li{
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .result-list-answers{
+    margin-top: 10px;
+
+    li{
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+      font-size: 16px;
+      font-weight: normal;
+
+      &:last-child{
+        margin-bottom: 0;
+      }
+
+      &:before{
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $baseLight;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+    }
+
+    li.right{
+      &:before{
+        border: 2px solid transparent;
+        background-color: $accent;
+      }
+
+      &:after{
+        content: '';
+        position: absolute;
+        top: 7px;
+        left: 8px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    li.part{
+      &:before{
+        border: 2px solid $accent;
+      }
+    }
+
+    li.wrong{
+      &:before{
+        border: 2px solid transparent;
+        background-color: #f00;
+      }
+
+      &:after{
+        content: '+';
+        position: absolute;
+        top: -6px;
+        left: 3px;
+        font-size: 24px;
+        font-weight: 700;
+        transform: rotate(45deg);
+      }
+    }
   }
 }
