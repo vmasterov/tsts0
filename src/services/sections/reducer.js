@@ -1,4 +1,4 @@
-import {GET_SECTIONS} from "./types";
+import {FETCH_SECTIONS} from "./types";
 
 const initialState = {
     sections: []
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_SECTIONS:
+        case FETCH_SECTIONS:
             return {sections: action.payload};
 
         default:

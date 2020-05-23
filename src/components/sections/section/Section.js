@@ -6,13 +6,9 @@ const Section = (props) => {
     // todo show full section's caption by hover
     return (
         <a
-            href={props.section.link}
             className="section-card"
-            onClick={(event) => {
-                event.preventDefault();
-                props.getTest();
-                props.pageTest();
-            }}
+            href="#"
+            onClick={(event) => props.goTest(event, props.section.link)}
         >
             <span
                 className="section-logo"

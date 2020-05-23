@@ -1,6 +1,8 @@
 import "./main.scss"
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import {Route} from 'react-router-dom'
+import {bindActionCreators} from "redux";
 import Preloader from "../preloader/Preloader";
 import Caption from "../caption/Caption";
 import Test from "../test/Test";
@@ -13,11 +15,72 @@ import {closeMenu, openMenu} from "../../services/menu/actions";
 import Result from "../result/Result";
 
 class Main extends Component {
+
+
     render() {
+        /*const route = this.props.sections.map((section, index) => {
+            return (
+                <Route
+                    key={section.id}
+                    exact
+                    path={section.link}
+                    component={Test}
+                />
+            )
+        });*/
+
         return (
             <main className="main-content">
                 <div className="container">
-                    <Caption
+                    <Route
+                        exact path="/"
+                        // component={Sections}
+                        render={() => <Sections testProp="Test1" />}
+                    />
+                    <Route
+                        exact path="/1"
+                        component={Test}
+                    />
+                </div>
+            </main>
+        )
+    }
+}
+
+const matStateToProps = state => {
+    return ({
+        test: state.test,
+        loading: state.loading.loading,
+        page: state.pages.page,
+        sections: state.sections,
+        search: state.search,
+        show: state.menu.show
+    })
+};
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators(
+        {
+            // getSections,
+            // getTest,
+            pageTest,
+            pageResult,
+            pageSections,
+            toggleCtrl,
+            getSearch,
+            openMenu,
+            closeMenu
+        },
+        dispatch
+    )
+);
+
+export default connect(matStateToProps, mapDispatchToProps)(Main);
+
+
+
+/*
+<Caption
                         timer={this.props.test.timer}
                         loading={this.props.loading}
                         page={this.props.page}
@@ -59,36 +122,4 @@ class Main extends Component {
                            pageTest={this.props.pageTest}
                         />
                     }
-                </div>
-            </main>
-        )
-    }
-}
-
-const matStateToProps = state => {
-    return ({
-        test: state.test,
-        loading: state.loading.loading,
-        page: state.pages.page,
-        sections: state.sections,
-        search: state.search,
-        show: state.menu.show
-    })
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getSections: () => dispatch(getSections()),
-        getTest: () => dispatch(getTest()),
-        pageTest: () => dispatch(pageTest()),
-        pageResult: () => dispatch(pageResult()),
-        pageSections: () => dispatch(pageSections()),
-        toggleCtrl: (id, value, checked) => dispatch(toggleCtrl(id, value, checked)),
-        getSearch: (find) => dispatch(getSearch(find)),
-        openMenu: () => dispatch(openMenu()),
-        closeMenu: () => dispatch(closeMenu())
-
-}
-};
-
-export default connect(matStateToProps, mapDispatchToProps)(Main);
+*/

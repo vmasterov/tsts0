@@ -1,14 +1,22 @@
-import {GET_TEST, TOGGLE_CTRL} from "./types";
+import {FETCH_TEST, FETCHING_TEST, FETCHED_TEST, TOGGLE_CTRL} from "./types";
 
 const initialState = {
-    questions: [],
+    // questions: [],
+    test: {},
+    isFetching: false,
     timer: {}
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_TEST:
-            return {...state, ...action.payload};
+        case FETCH_TEST:
+            return {...state, test: action.payload};
+
+        case FETCHING_TEST:
+            return {...state, isFetching: true};
+
+        case FETCHED_TEST:
+            return {...state, isFetching: false};
 
         case TOGGLE_CTRL:
             let newState = {...state};
