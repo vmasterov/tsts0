@@ -3,22 +3,27 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Route} from 'react-router-dom'
 import {bindActionCreators} from "redux";
-import Preloader from "../preloader/Preloader";
-import Caption from "../caption/Caption";
+// import Preloader from "../preloader/Preloader";
+// import Caption from "../caption/Caption";
 import Test from "../test/Test";
 import Sections from "../sections/Sections";
-import {getSections} from "../../services/sections/action";
+import {fetchSections, getSections} from "../../services/sections/action";
 import {pageResult, pageSections, pageTest} from "../../services/pages/actions";
-import {getTest, toggleCtrl} from "../../services/test/action";
+import {fetchTest, getTest, toggleCtrl} from "../../services/test/action";
 import {getSearch} from "../../services/search/action";
 import {closeMenu, openMenu} from "../../services/menu/actions";
-import Result from "../result/Result";
+// import Result from "../result/Result";
+import {push} from "connected-react-router";
 
 class Main extends Component {
-
+    componentDidMount() {
+        if (!this.props.sections.length) {
+            this.props.fetchSections();
+        }
+    }
 
     render() {
-        /*const route = this.props.sections.map((section, index) => {
+        const route = this.props.sections.map((section, index) => {
             return (
                 <Route
                     key={section.id}
@@ -27,7 +32,7 @@ class Main extends Component {
                     component={Test}
                 />
             )
-        });*/
+        });
 
         return (
             <main className="main-content">
@@ -35,12 +40,23 @@ class Main extends Component {
                     <Route
                         exact path="/"
                         // component={Sections}
-                        render={() => <Sections testProp="Test1" />}
+                        render={
+                            () => {
+                                return (
+                                    <Sections
+                                        sections={this.props.sections}
+                                        isFetching={this.props.isFetching}
+                                        test={this.props.test}
+                                        search={this.props.search}
+                                        fetchSections={this.props.fetchSections}
+                                        fetchTest={this.props.fetchTest}
+                                        changePage={this.props.changePage}
+                                    />
+                                    )
+                            }
+                        }
                     />
-                    <Route
-                        exact path="/1"
-                        component={Test}
-                    />
+                    {route}
                 </div>
             </main>
         )
@@ -49,11 +65,11 @@ class Main extends Component {
 
 const matStateToProps = state => {
     return ({
-        test: state.test,
+        sections: state.sections.sections,
+        search: state.search,
+
         loading: state.loading.loading,
         page: state.pages.page,
-        sections: state.sections,
-        search: state.search,
         show: state.menu.show
     })
 };
@@ -61,8 +77,9 @@ const matStateToProps = state => {
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
-            // getSections,
-            // getTest,
+            fetchSections,
+            changePage: (link) => push(link),
+
             pageTest,
             pageResult,
             pageSections,

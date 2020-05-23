@@ -1,23 +1,13 @@
 import React, {Component} from "react";
 import Section from "./section/Section";
-import {bindActionCreators} from "redux";
-import {fetchSections} from "../../services/sections/action";
-import {push} from "connected-react-router";
-// import {getSearch} from "../../services/search/action";
+import {fetchTest} from "../../services/test/action";
 import {connect} from "react-redux";
-import {fetchTest, getTest} from "../../services/test/action";
+import {bindActionCreators} from "redux";
+// import {getSearch} from "../../services/search/action";
 
 class Sections extends Component {
-    componentDidMount() {
-        if (!this.props.sections.length) {
-            this.props.fetchSections();
-        }
-    }
-
     goTest = (event, link) => {
         event.preventDefault();
-
-        console.log(this.props);
 
         const isFetching = this.props.isFetching;
         const testId = this.props.test.id;
@@ -33,7 +23,8 @@ class Sections extends Component {
     };
 
     render() {
-        const filteredSections = this.props.sections.sections.filter(section => {
+        console.log(this.props.isFetching);
+        const filteredSections = this.props.sections.filter(section => {
             const name = section.name.toLowerCase();
             const find = this.props.search.toLowerCase();
 
@@ -52,28 +43,23 @@ class Sections extends Component {
         });
 
         return (
-            <div className="row">
-                {sections}
-            </div>
+            <div className="row">{sections}</div>
         )
     }
 }
-
 const matStateToProps = state => {
     return ({
-        sections: state.sections,
         isFetching: state.test.isFetching,
         test: state.test.test,
         search: state.search
     })
 };
 
+
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
-            fetchSections,
-            fetchTest,
-            changePage: (link) => push(link)
+            fetchTest
         },
         dispatch
     )

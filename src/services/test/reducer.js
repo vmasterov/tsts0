@@ -9,11 +9,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_TEST:
-            return {...state, test: action.payload};
-
         case FETCHING_TEST:
             return {...state, isFetching: true};
+
+        case FETCH_TEST:
+            return {...state, test: action.payload};
 
         case FETCHED_TEST:
             return {...state, isFetching: false};

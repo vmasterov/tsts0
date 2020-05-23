@@ -2,6 +2,11 @@ import React, {Component} from "react";
 import Question from "./question/Question";
 import Button from "../button/Button";
 import Popup from "../popup/Popup";
+import {history} from "../../store";
+import {bindActionCreators} from "redux";
+import {fetchTest, toggleCtrl} from "../../services/test/action";
+import {connect} from "react-redux";
+import Preloader from "../preloader/Preloader";
 
 class Test extends Component {
     constructor(props) {
@@ -11,6 +16,12 @@ class Test extends Component {
             current: 0,
             questions: []
         };
+    }
+
+    componentDidMount() {
+        if (!this.props.isFetching && !this.props.test.id) {
+            this.props.fetchTest(history.location.pathname);
+        }
     }
 
     goToQuestion = id => {
@@ -54,36 +65,39 @@ class Test extends Component {
     };
 
     render() {
+        console.log(this.props.test.id);
         return (
             <div className="row">
-                <div className="col">
-                    <Question
-                        questions={this.props.test.questions}
-                        current={this.state.current}
-                        toggleCtrl={this.props.toggleCtrl}
-                    />
-
-                    <div className="controls d-md-flex justify-content-end">
-                        <Button
-                            name='Карта теста'
-                            classes='button'
-                            click={this.showMap}
+                {this.props.test.id
+                    ?
+                    <div className="col">
+                        <Question
+                            questions={this.props.test.questions}
+                            current={this.state.current}
+                            toggleCtrl={this.props.toggleCtrl}
                         />
 
-                        <Button
-                            name='Ответить'
-                            classes='button button-accent'
-                            click={this.setAnswer}
-                        />
+                        <div className="controls d-md-flex justify-content-end">
+                            <Button
+                                name='Карта теста'
+                                classes='button'
+                                click={this.showMap}
+                            />
 
-                        <Button
-                            name='Завершить'
-                            classes='button'
-                            click={this.endTest}
-                        />
-                    </div>
+                            <Button
+                                name='Ответить'
+                                classes='button button-accent'
+                                click={this.setAnswer}
+                            />
 
-                    {!this.props.showPopup &&
+                            <Button
+                                name='Завершить'
+                                classes='button'
+                                click={this.endTest}
+                            />
+                        </div>
+
+                        {!this.props.showPopup &&
                         <Popup
                             content={this.state.questions}
                             width={window.innerWidth > 576 ? 500 : 95}
@@ -91,11 +105,32 @@ class Test extends Component {
                             measure={window.innerWidth > 576 ? 'px' : '%'}
 
                         />
-                    }
-                </div>
+                        }
+                    </div>
+                    :
+                    <Preloader/>
+                }
             </div>
         )
     }
 }
 
-export default Test;
+const matStateToProps = state => {
+    return ({
+        isFetching: state.test.isFetching,
+        test: state.test.test
+    })
+};
+
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators(
+        {
+            fetchTest,
+            toggleCtrl
+        },
+        dispatch
+    )
+);
+
+export default connect(matStateToProps, mapDispatchToProps)(Test);
