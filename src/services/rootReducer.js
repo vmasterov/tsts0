@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import {connectRouter} from 'connected-react-router';
-import menuReducer from "./menu/reducer";
+import menuReducer from "./popup/reducer";
 import testReducer from "./test/reducer";
 import loadReducer from "./preloader/reducer";
 import Pages from "./pages/reducer";

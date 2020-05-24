@@ -3,7 +3,9 @@ import Section from "./section/Section";
 import {fetchTest} from "../../services/test/action";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-// import {getSearch} from "../../services/search/action";
+import Caption from "../caption/Caption";
+
+import {getSearch} from "../../services/search/action";
 
 class Sections extends Component {
     goTest = (event, link) => {
@@ -23,7 +25,6 @@ class Sections extends Component {
     };
 
     render() {
-        console.log(this.props.isFetching);
         const filteredSections = this.props.sections.filter(section => {
             const name = section.name.toLowerCase();
             const find = this.props.search.toLowerCase();
@@ -43,10 +44,20 @@ class Sections extends Component {
         });
 
         return (
-            <div className="row">{sections}</div>
+            <div>
+                <Caption
+                    timer={this.props.test.timer}
+                    loading={this.props.loading}
+                    page={this.props.page}
+                    pageResult={this.props.pageResult}
+                    getSearch={this.props.getSearch}
+                />
+                <div className="row">{sections}</div>
+            </div>
         )
     }
 }
+
 const matStateToProps = state => {
     return ({
         isFetching: state.test.isFetching,
@@ -59,7 +70,8 @@ const matStateToProps = state => {
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
-            fetchTest
+            fetchTest,
+            getSearch
         },
         dispatch
     )

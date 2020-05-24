@@ -13,12 +13,14 @@ class Timer extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.time);
         this.setState({...this.props.time});
 
         this.intID = setInterval(() => {
             if (!getTimer(this.state)) {
                 clearInterval(this.intID);
-                this.props.pageResult();
+                // this.props.pageResult();
+                this.props.changePage('/result');
             }
             else {
                 this.setState({...getTimer(this.state)});

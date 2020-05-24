@@ -1,10 +1,8 @@
 import {FETCH_TEST, FETCHING_TEST, FETCHED_TEST, TOGGLE_CTRL} from "./types";
 
 const initialState = {
-    // questions: [],
     test: {},
-    isFetching: false,
-    timer: {}
+    isFetching: false
 };
 
 export default (state = initialState, action) => {
@@ -19,8 +17,7 @@ export default (state = initialState, action) => {
             return {...state, isFetching: false};
 
         case TOGGLE_CTRL:
-            let newState = {...state};
-            let qsts = newState.questions;
+            let qsts = [...state.test.questions];
             let qInx = qsts.findIndex(item => item.id === action.payload.id);
             let aInd = qsts[qInx].answer.findIndex(item => item === action.payload.value);
 
@@ -40,7 +37,7 @@ export default (state = initialState, action) => {
                 }
             }
 
-            return {...newState};
+            return {...state, test: {...state.test, questions: qsts}};
 
         default:
             return state;

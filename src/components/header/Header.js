@@ -5,7 +5,7 @@ import Logo from "./Logo";
 // import Popup from "../popup/Popup";
 import {connect} from "react-redux";
 
-// const menu = [
+// const popup = [
 //     {
 //         name: 'Вход',
 //         link: '/'
@@ -23,8 +23,8 @@ const Header = (props) => {
                 <div className="row">
                     <Logo page={props.page}/>
 
-                    {/*<Menu content={menu} />*/}
-                    {/*{!props.remove && <Popup content={menu} />}*/}
+                    {/*<Menu content={popup} />*/}
+                    {/*{!props.remove && <Popup content={popup} />}*/}
                 </div>
             </div>
         </header>

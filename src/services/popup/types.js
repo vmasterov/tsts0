@@ -1,0 +1,3 @@
+export const OPEN_POPUP = "POPUP/OPEN_POPUP";
+export const CLOSE_POPUP = "POPUP/CLOSE_POPUP";
+export const REMOVE_POPUP = "POPUP/REMOVE_POPUP";

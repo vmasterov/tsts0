@@ -7,6 +7,8 @@ import {bindActionCreators} from "redux";
 import {fetchTest, toggleCtrl} from "../../services/test/action";
 import {connect} from "react-redux";
 import Preloader from "../preloader/Preloader";
+import {closePopup, openPopup} from "../../services/popup/actions";
+import Caption from "../caption/Caption";
 
 class Test extends Component {
     constructor(props) {
@@ -52,7 +54,8 @@ class Test extends Component {
     setAnswer = () => {
         this.setState(prevState => {
                 if ((this.props.test.questions.length - 1) === prevState.current) {
-                    this.props.pageResult();
+                    // this.props.pageResult();
+                    this.props.changePage("/result");
                 } else {
                     return {current: prevState.current + 1};
                 }
@@ -61,54 +64,72 @@ class Test extends Component {
     };
 
     endTest = () => {
-        this.props.pageResult();
+        this.props.changePage("/result");
     };
 
     render() {
-        console.log(this.props.test.id);
+        let timer = {
+            min: 0,
+            sec: 5
+        };
         return (
-            <div className="row">
-                {this.props.test.id
-                    ?
-                    <div className="col">
-                        <Question
-                            questions={this.props.test.questions}
-                            current={this.state.current}
-                            toggleCtrl={this.props.toggleCtrl}
-                        />
+            <div>
+                {
+                    this.props.test.id
+                        ?
+                        <div>
+                            < Caption
 
-                        <div className="controls d-md-flex justify-content-end">
-                            <Button
-                                name='Карта теста'
-                                classes='button'
-                                click={this.showMap}
+                                timer={this.props.test.timer}
+                                // timer={timer}
+                                loading={this.props.loading}
+                                page={this.props.page}
+                                pageResult={this.props.pageResult}
+                                getSearch={this.props.getSearch}
+                                changePage={this.props.changePage}
                             />
+                            <div className="row">
+                                <div className="col">
+                                    <Question
+                                        questions={this.props.test.questions}
+                                        current={this.state.current}
+                                        toggleCtrl={this.props.toggleCtrl}
+                                    />
 
-                            <Button
-                                name='Ответить'
-                                classes='button button-accent'
-                                click={this.setAnswer}
-                            />
+                                    <div className="controls d-md-flex justify-content-end">
+                                        <Button
+                                            name='Карта теста'
+                                            classes='button'
+                                            click={this.showMap}
+                                        />
 
-                            <Button
-                                name='Завершить'
-                                classes='button'
-                                click={this.endTest}
-                            />
+                                        <Button
+                                            name='Ответить'
+                                            classes='button button-accent'
+                                            click={this.setAnswer}
+                                        />
+
+                                        <Button
+                                            name='Завершить'
+                                            classes='button'
+                                            click={this.endTest}
+                                        />
+                                    </div>
+
+                                    {!this.props.showPopup &&
+                                    <Popup
+                                        content={this.state.questions}
+                                        width={window.innerWidth > 576 ? 500 : 95}
+                                        height={window.innerWidth > 576 ? 400 : 95}
+                                        measure={window.innerWidth > 576 ? 'px' : '%'}
+
+                                    />
+                                    }
+                                </div>
+                            </div>
                         </div>
-
-                        {!this.props.showPopup &&
-                        <Popup
-                            content={this.state.questions}
-                            width={window.innerWidth > 576 ? 500 : 95}
-                            height={window.innerWidth > 576 ? 400 : 95}
-                            measure={window.innerWidth > 576 ? 'px' : '%'}
-
-                        />
-                        }
-                    </div>
-                    :
-                    <Preloader/>
+                        :
+                        <div>111</div>
                 }
             </div>
         )
@@ -127,7 +148,9 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
             fetchTest,
-            toggleCtrl
+            toggleCtrl,
+            openPopup,
+            closePopup
         },
         dispatch
     )

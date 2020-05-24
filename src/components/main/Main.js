@@ -11,9 +11,10 @@ import {fetchSections, getSections} from "../../services/sections/action";
 import {pageResult, pageSections, pageTest} from "../../services/pages/actions";
 import {fetchTest, getTest, toggleCtrl} from "../../services/test/action";
 import {getSearch} from "../../services/search/action";
-import {closeMenu, openMenu} from "../../services/menu/actions";
+import {closeMenu, openMenu} from "../../services/popup/actions";
 // import Result from "../result/Result";
 import {push} from "connected-react-router";
+import Result from "../result/Result";
 
 class Main extends Component {
     componentDidMount() {
@@ -27,9 +28,16 @@ class Main extends Component {
             return (
                 <Route
                     key={section.id}
-                    exact
-                    path={section.link}
-                    component={Test}
+                    exact path={section.link}
+                    render={
+                        () => {
+                            return (
+                                <Test
+                                    changePage={this.props.changePage}
+                                />
+                            )
+                        }
+                    }
                 />
             )
         });
@@ -39,14 +47,12 @@ class Main extends Component {
                 <div className="container">
                     <Route
                         exact path="/"
-                        // component={Sections}
                         render={
                             () => {
                                 return (
                                     <Sections
                                         sections={this.props.sections}
                                         isFetching={this.props.isFetching}
-                                        test={this.props.test}
                                         search={this.props.search}
                                         fetchSections={this.props.fetchSections}
                                         fetchTest={this.props.fetchTest}
@@ -57,6 +63,18 @@ class Main extends Component {
                         }
                     />
                     {route}
+                    <Route
+                        exact path="/result"
+                        render={
+                            () => {
+                                return (
+                                    <Result
+                                        changePage={this.props.changePage}
+                                    />
+                                )
+                            }
+                        }
+                    />
                 </div>
             </main>
         )
@@ -85,8 +103,8 @@ const mapDispatchToProps = dispatch => (
             pageSections,
             toggleCtrl,
             getSearch,
-            openMenu,
-            closeMenu
+            // openMenu,
+            // closeMenu
         },
         dispatch
     )

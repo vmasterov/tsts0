@@ -2,6 +2,7 @@ import React from "react";
 import Timer from "./timer/Timer";
 // import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import Search from "./search/Search";
+import {history} from "../../store";
 /*
 const breadcrumbsArray = [
     {
@@ -23,6 +24,7 @@ export default (props) => {
             time={props.timer}
             result={props.result}
             pageResult={props.pageResult}
+            changePage={props.changePage}
         />;
 
     let caption;
@@ -49,15 +51,19 @@ export default (props) => {
                     </h1>
                 </div>
                 <div className="col-2">
-                    {props.page === "test" && timer}
+                    {
+                        (history.location.pathname === "/1" || history.location.pathname === "/2")
+                        &&
+                        timer
+                    }
                 </div>
             </div>
             <div className="row">
                 <div className="col">
-                    {props.page === "sections" &&
-                        <Search
-                            getSearch={props.getSearch}
-                        />
+                    {history.location.pathname === "/" &&
+                    <Search
+                        getSearch={props.getSearch}
+                    />
                     }
                     {/*{props.page !== "sections" && <Breadcrumbs breadcrumbsArray={breadcrumbsArray}/>}*/}
                 </div>

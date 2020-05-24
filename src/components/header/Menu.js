@@ -1,7 +1,7 @@
 import React from "react";
 // import lang from "../../static/lang.svg";
 import burger from "../../static/burger.svg";
-import {closeMenu, openMenu} from "../../services/menu/actions";
+import {closeMenu, openMenu} from "../../services/popup/actions";
 import {connect} from "react-redux";
 
 const Menu = (props) => {

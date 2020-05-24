@@ -3,16 +3,16 @@ import React, {Component} from 'react';
 import Rodal from 'rodal';
 import {connect} from "react-redux";
 import 'rodal/lib/rodal.css';
-import {closeMenu, openMenu, removeMenu} from "../../services/menu/actions";
+import {closePopup, openPopup, removePopup} from "../../services/popup/actions";
 
 class Popup extends Component {
     hide = () => {
-        this.props.closeMenu()
+        this.props.closePopup()
     };
 
     remove = () => {
         if (!this.props.visible) {
-            this.props.removeMenu()
+            this.props.removePopup()
         }
     };
 
@@ -44,9 +44,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    openMenu,
-    closeMenu,
-    removeMenu
+    openPopup,
+    closePopup,
+    removePopup
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Popup);

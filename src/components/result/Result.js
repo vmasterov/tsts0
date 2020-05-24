@@ -1,12 +1,50 @@
 import './result.scss';
 import React from "react";
 import rightAnswers from "./answers.json"
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {fetchTest, toggleCtrl} from "../../services/test/action";
+import {closePopup, openPopup} from "../../services/popup/actions";
 // import Button from "../button/Button";
 // import Test from "../test/Test";
 
-export default (props) => {
-    const results = getResults(props.test, rightAnswers.questions);
+const Result = props => {
+    const results = props.test.id && getResults(props.test.questions, rightAnswers.questions);
+    const content = props.test.id ?
+        <div className="row results">
+            <div className="col-md-3">
+            <div className="results-ratio">
+                {results.ratio}
+            </div>
 
+            <div className="results-quantity">
+                {results.correct} из {results.all}
+            </div>
+
+            <div className="results-buttons">
+                {/*<Button*/}
+                {/*    name='Пройти ещё раз'*/}
+                {/*    classes='button button-accent'*/}
+                {/*    click={goToTest}*/}
+                {/*/>*/}
+
+                {/*<Button*/}
+                {/*    name='На главную'*/}
+                {/*    classes='button button-accent'*/}
+                {/*    click={goToMain}*/}
+                {/*/>*/}
+                <a href="/" className='button button-accent'>На главную</a>
+            </div>
+        </div>
+            <div className="col-md-8 offset-md-1">
+            <ul className="result-list">
+                {results.layout}
+            </ul>
+        </div>
+        </div>
+    :
+            <div>No data</div>
+    ;
     // const goToMain = () => {
     //     props.pageSections();
     // };
@@ -16,40 +54,19 @@ export default (props) => {
     // };
 
     return (
-        <div className="row results">
-            <div className="col-md-3">
-                <div className="results-ratio">
-                    {results.ratio}
-                </div>
-
-                <div className="results-quantity">
-                    {results.correct} из {results.all}
-                </div>
-
-                <div className="results-buttons">
-                    {/*<Button*/}
-                    {/*    name='Пройти ещё раз'*/}
-                    {/*    classes='button button-accent'*/}
-                    {/*    click={goToTest}*/}
-                    {/*/>*/}
-
-                    {/*<Button*/}
-                    {/*    name='На главную'*/}
-                    {/*    classes='button button-accent'*/}
-                    {/*    click={goToMain}*/}
-                    {/*/>*/}
-                    <a href="/" className='button button-accent'>На главную</a>
-                </div>
-            </div>
-
-            <div className="col-md-8 offset-md-1">
-                <ul className="result-list">
-                    {results.layout}
-                </ul>
-            </div>
+        <div>
+            {content}
         </div>
-    )
-}
+        )
+};
+
+const matStateToProps = state => {
+    return ({
+        test: state.test.test
+    })
+};
+
+export default connect(matStateToProps)(Result);
 
 function getResults(questions, rightAnswers) {
     let result = 0;

@@ -7,7 +7,7 @@ const Control = (props) => {
     };
 
     return (
-        <label className = "input-block" >{props.text}
+        <label className = "input-block">{props.text}
             <input
                 className="input-orig"
                 type = {props.type}
