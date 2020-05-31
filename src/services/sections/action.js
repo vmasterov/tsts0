@@ -1,28 +1,5 @@
-import {FETCH_SECTIONS, GET_SECTIONS} from "./types"
-import {sectionsArray} from "../../components/sections/sectionsArray";
+import {FETCH_SECTIONS} from "./types"
 import {hideLoader, showLoader} from "../preloader/action";
-
-/*
-export function getSections() {
-    return async dispatch => {
-        try {
-            dispatch(showLoader());
-
-            setTimeout(() => {
-                dispatch({
-                    type: GET_SECTIONS,
-                    payload: sectionsArray
-                });
-
-                dispatch(hideLoader());
-            }, 1000)
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-}
- */
 
 export const fetchSections = () => {
     return async dispatch => {

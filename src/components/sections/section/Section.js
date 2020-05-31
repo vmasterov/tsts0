@@ -7,7 +7,7 @@ const Section = (props) => {
     return (
         <a
             className="section-card"
-            href="#"
+            href="/"
             onClick={(event) => props.goTest(event, props.section.link)}
         >
             <span

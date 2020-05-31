@@ -22,7 +22,6 @@ export default (props) => {
                                 answ={props.questions[props.current].answer}
                                 type={props.questions[props.current].type}
                                 toggleCtrl={props.toggleCtrl}
-                                // change={props.change}
                             />
                         )
                     })

@@ -3,18 +3,7 @@ import Timer from "./timer/Timer";
 // import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import Search from "./search/Search";
 import {history} from "../../store";
-/*
-const breadcrumbsArray = [
-    {
-        name: 'JavaScript',
-        link: '/'
-    },
-    {
-        name: 'Основы JavaScript',
-        link: ''
-    }
-];
-*/
+
 export default (props) => {
     const timer = props.loading
         ?

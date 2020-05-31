@@ -34,7 +34,7 @@ const Header = (props) => {
 const mapStateToProps = state => {
     return ({
         remove: state.menu.remove,
-        page: state.pages.page
+        page: state.router.location.pathname
     })
 };
 

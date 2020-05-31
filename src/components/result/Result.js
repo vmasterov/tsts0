@@ -3,8 +3,7 @@ import React from "react";
 import rightAnswers from "./answers.json"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {fetchTest, toggleCtrl} from "../../services/test/action";
-import {closePopup, openPopup} from "../../services/popup/actions";
+import {push} from "connected-react-router";
 // import Button from "../button/Button";
 // import Test from "../test/Test";
 
@@ -66,7 +65,16 @@ const matStateToProps = state => {
     })
 };
 
-export default connect(matStateToProps)(Result);
+const mapDispatchToProps = dispatch => (
+    bindActionCreators(
+        {
+            changePage: (link) => push(link)
+        },
+        dispatch
+    )
+);
+
+export default connect(matStateToProps, mapDispatchToProps)(Result);
 
 function getResults(questions, rightAnswers) {
     let result = 0;

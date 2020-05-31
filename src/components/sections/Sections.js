@@ -4,8 +4,9 @@ import {fetchTest} from "../../services/test/action";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Caption from "../caption/Caption";
-
 import {getSearch} from "../../services/search/action";
+import {push} from "connected-react-router";
+import {fetchSections} from "../../services/sections/action";
 
 class Sections extends Component {
     goTest = (event, link) => {
@@ -62,7 +63,8 @@ const matStateToProps = state => {
     return ({
         isFetching: state.test.isFetching,
         test: state.test.test,
-        search: state.search
+        search: state.search,
+        sections: state.sections.sections,
     })
 };
 
@@ -71,7 +73,9 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
             fetchTest,
-            getSearch
+            getSearch,
+            fetchSections,
+            changePage: (link) => push(link)
         },
         dispatch
     )

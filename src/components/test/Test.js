@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import Preloader from "../preloader/Preloader";
 import {closePopup, openPopup} from "../../services/popup/actions";
 import Caption from "../caption/Caption";
+import {push} from "connected-react-router";
 
 class Test extends Component {
     constructor(props) {
@@ -54,7 +55,6 @@ class Test extends Component {
     setAnswer = () => {
         this.setState(prevState => {
                 if ((this.props.test.questions.length - 1) === prevState.current) {
-                    // this.props.pageResult();
                     this.props.changePage("/result");
                 } else {
                     return {current: prevState.current + 1};
@@ -68,10 +68,6 @@ class Test extends Component {
     };
 
     render() {
-        let timer = {
-            min: 0,
-            sec: 5
-        };
         return (
             <div>
                 {
@@ -81,7 +77,6 @@ class Test extends Component {
                             < Caption
 
                                 timer={this.props.test.timer}
-                                // timer={timer}
                                 loading={this.props.loading}
                                 page={this.props.page}
                                 pageResult={this.props.pageResult}
@@ -129,7 +124,7 @@ class Test extends Component {
                             </div>
                         </div>
                         :
-                        <div>111</div>
+                        <Preloader />
                 }
             </div>
         )
@@ -150,7 +145,8 @@ const mapDispatchToProps = dispatch => (
             fetchTest,
             toggleCtrl,
             openPopup,
-            closePopup
+            closePopup,
+            changePage: (link) => push(link)
         },
         dispatch
     )

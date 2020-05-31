@@ -6,7 +6,7 @@ export default (props) => {
 
     return (
         <div className="col">
-            {props.page === 'sections' ? logoNoLink : logoLink}
+            {props.page === '/' ? logoNoLink : logoLink}
         </div>
     )
 }
